@@ -120,7 +120,7 @@ class Todo
 	
 	
     public function quit(){
-		exit();
+		exit('Todo List closed');
 		fclose	($this->myFile);
     }
 

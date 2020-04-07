@@ -17,16 +17,17 @@ public function showMenu($userInput){
     2 - Show all to do list
     3 - Show Item in a list
     4 - Edit List Name 
-    5 - Remove a list 
-    6 - Remove an item in the list
-    7 - Delete all Todo
-    8 - Quit!");
+    5 - Edit List Item
+    6 - Remove a list 
+    7 - Remove an item in the list
+    8 - Delete all Todo
+    9 - Quit!");
 
 $userInput = intval(trim( fgets(STDIN) ));
 switch ($userInput)
 {
     case 1:
-        $this->createTodo();
+        $this->createTodo('Office Tasks', ['Write Code', 'Gist']);
         break;
     case 2:
     $this->getAllTodo();   
@@ -36,19 +37,24 @@ switch ($userInput)
         $this->getATodo());
         break;
     case 4:
-        $this->updateTodoName();
+        $this->updateTodoName('PlU9go55eY',' work');
         break;
-    case 5:
+    
+    case 5;
+        $this->updateTodoList('PlU9go55eY',['Write Code', 'Gist']);
+        break;
+    case 6:
        $this->deleteTodo(10);
        
         break;
-    case 6:
+    
+    case 7:
         $this->deleteTodoListItem();
         break;
-    case 7:
+    case 8:
         $this->deleteAllTodo();
         break;
-    case 8:
+    case 9:
         $this->quit();
     break;
     default:
@@ -62,4 +68,4 @@ switch ($userInput)
 
 $view = new View;
 
-$view->showMenu($userInput);
+$view->showMenu(!empty($userInput));

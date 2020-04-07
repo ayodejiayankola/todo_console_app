@@ -51,6 +51,7 @@ class Todo
 		$all_todo = [];
 		while ($data = fgets($this->myFile)) {
 			$data_obj = unserialize($data);
+			$all_todo[] = var_dump($data_obj);
 		}
 		
 		return $all_todo;
@@ -88,8 +89,11 @@ class Todo
 		$list = $todo->list;
 		unset($list[$index]);
 		$this->updateTodoList($todoId, $list);
+
+	
 	}
 	
+
 	public function deleteTodo($id)
 	{
 		
@@ -116,58 +120,10 @@ class Todo
 	
 	
     public function quit(){
-        exit();
+		exit();
+		fclose	($this->myFile);
     }
 
-/*public function showMenu($userInput){
-
-		echo(@" Welcome to the Console Formular App
-		1 -  create a New todo list
-		2 - Show all to do list
-		3 - Show Item in a list
-		4 - Edit List Name 
-		5 - Remove a list 
-		6 - Remove an item in the list
-		7 - Pin a list
-		8 - Quit!");
-	
-	$userInput = intval(trim( fgets(STDIN) ));
-	switch ($userInput)
-	{
-		case 1:
-			$this->createTodo();
-			break;
-		case 2:
-			$this->getAllTodo();
-			break;
-		case 3:
-			$this->getATodo();
-			break;
-		case 4:
-			$this->updateTodoName();
-			break;
-		case 5:
-			$this->updateTodoList();
-			break;
-		case 6:
-			$this->deleteTodoListItem();
-			break;
-		case 7:
-			$this->deleteTodo();
-			break;
-		case 8:
-			$this->quit();
-		break;
-		default:
-			echo ("Input not understood, Please retry again...");
-			break;
-		}	
-	}
-
-
-*///$myTodo = new Todo;
-
-//$myTodo->showMenu($userInput);
 
 
 	} 

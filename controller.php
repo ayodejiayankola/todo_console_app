@@ -39,7 +39,7 @@ class Todo
 	{
 		// loop through all file rows, convert back to object, check if u have what u are looking for
 		while ($data = fgets($this->myFile)) {
-			$data_obj = unserialize($data);
+			$data_obj = json_decode($data);
 			if ($data_obj->id === $id) {
 				return $data_obj;
 			}
@@ -50,7 +50,7 @@ class Todo
 	{
 		$all_todo = [];
 		while ($data = fgets($this->myFile)) {
-			$data_obj = unserialize($data);
+			$data_obj = json_decode($data);
 			$all_todo[] = var_dump($data_obj);
 		}
 		
@@ -64,7 +64,7 @@ class Todo
 		
 		$this->deleteTodo($id);
 		
-		$json_str = serialize($todo);
+		$json_str = json_encode($todo);
 		return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
 		
 		
@@ -77,7 +77,7 @@ class Todo
 		
 		$this->deleteTodo($id);
 		
-		$json_str = serialize($todo);
+		$json_str = json_encode($todo);
 		return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
 	}
 	
@@ -99,7 +99,7 @@ class Todo
 		
 		$todos = [];
 		while ($json_str = fgets($this->myFile)) {
-			$data_obj = unserialize($json_str);
+			$data_obj = json_decode($json_str);
 			if ($data_obj->id !== $id) {
 				$todos[] = $data_obj;
 			}
@@ -107,7 +107,7 @@ class Todo
 		$this->deleteAllTodo();
 		
 		foreach ($todos as $todo) {
-			$json_str = serialize($todo);
+			$json_str = json_encode($todo);
 			file_put_contents("db.json", $json_str, FILE_APPEND | LOCK_EX);
 		}
 		

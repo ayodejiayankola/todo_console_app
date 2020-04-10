@@ -34,14 +34,14 @@ switch ($userInput)
         break;
     case 3:
         var_dump(
-        $this->getATodo());
+        $this->getATodo('Q744JT8AOz'));
         break;
     case 4:
-        $this->updateTodoName('PlU9go55eY',' work');
+        $this->updateTodoName('KOBAGSXW0s',' work');
         break;
     
     case 5;
-        $this->updateTodoList('PlU9go55eY',['Write Code', 'Gist']);
+        $this->updateTodoList('SrlBpIFxWa',['Write Code', 'sleep']);
         break;
     case 6:
        $this->deleteTodo(10);
@@ -67,5 +67,6 @@ switch ($userInput)
 }
 
 $view = new View;
+
 
 $view->showMenu(!empty($userInput));

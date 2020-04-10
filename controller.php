@@ -29,7 +29,7 @@ class Todo
 		$this->list = $list;
 		
 		// serialise = changing obj to string
-		$json_str = serialize($this);
+		$json_str = json_encode($this);
 		
 		// write to file
 		return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
@@ -116,6 +116,10 @@ class Todo
 	public function deleteAllTodo()
 	{
 		file_put_contents("db.json", "");
+	}
+	public function pinList($id)
+	{
+		
 	}
 	
 	

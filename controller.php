@@ -28,7 +28,7 @@ class Todo
 		$this->name = $name;
 		$this->list = $list;
 		
-		// serialise = changing obj to string
+		// changing obj to json format
 		$json_str = json_encode($this);
 		
 		// write to file

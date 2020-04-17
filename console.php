@@ -1,7 +1,7 @@
 <?php
 
 
-require_once('new.php');
+require_once('menu.php');
 
 
 //instaiate the new class

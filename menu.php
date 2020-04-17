@@ -1,16 +1,12 @@
 <?php
 require_once 'controller.php';
 
-//$todo = new Todo();
-//$todo->createTodo('Office Tasks', ['Write Code', 'Gist'] , 'Home Tasks', [' Code', 'Gist'] );
+
+class Menu extends Todo{
 
 
 
-class View extends Todo{
-
-
-
-    public function showMenu($userInput){
+    public function startMenu($id,$name,$list){
 
         echo(@" Welcome to the Console Formular App
     1 -  create a New todo list
@@ -27,14 +23,15 @@ class View extends Todo{
         switch ($userInput)
         {
             case 1:
-                $this->createTodo('Office Tasks', ['Write Code', 'Gist']);
+                $this->createTodo('Office Tasks', ['Write Code', 'Gist'])
+
                 break;
             case 2:
                 $this->getAllTodo();
                 break;
             case 3:
-                var_dump(
-                    $this->getATodo('Q744JT8AOz'));
+
+                    $this->getATodo('Q744JT8AOz');
                 break;
             case 4:
                 $this->updateTodoName('KOBAGSXW0s',' work');

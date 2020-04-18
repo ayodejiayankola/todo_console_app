@@ -5,8 +5,7 @@ require_once('menu.php');
 
 
 //instaiate the new class
-$view = new View;
+$view = new Menu();
 
 
-$view->showMenu(!empty($userInput));
-
+$view->startMenu(!empty($userInput));

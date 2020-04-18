@@ -6,7 +6,7 @@ class Menu extends Todo{
 
 
 
-    public function startMenu($id,$name,$list){
+    public function startMenu(){
 
         echo(@" Welcome to the Console Formular App
     1 -  create a New todo list
@@ -23,7 +23,7 @@ class Menu extends Todo{
         switch ($userInput)
         {
             case 1:
-                $this->createTodo('Office Tasks', ['Write Code', 'Gist'])
+                $this->createTodo('Office Tasks', ['Write Code', 'Gist']);
 
                 break;
             case 2:
@@ -31,7 +31,7 @@ class Menu extends Todo{
                 break;
             case 3:
 
-                    $this->getATodo('Q744JT8AOz');
+                $this->getATodo('Q744JT8AOz');
                 break;
             case 4:
                 $this->updateTodoName('KOBAGSXW0s',' work');
@@ -62,4 +62,3 @@ class Menu extends Todo{
 
 
 }
-

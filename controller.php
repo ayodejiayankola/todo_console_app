@@ -1,20 +1,18 @@
 <?php
-
-require_once 'helper.php';
-
+require 'helper.php';
 class Todo
 {
-    private $myFile;
+    private $myFile =[];
 
     public $id;
     public $name;
     public $list;
 
 
-    public function __construct()
+
+    public function __construct($myFile)
     {
-        // opened the file connection$this
-        $this->myFile = fopen("db.json", "a+") or die("Unable to open db!");
+        $this->myFile;
 
     }
 
@@ -129,5 +127,5 @@ class Todo
     }
 
 
-
 }
+

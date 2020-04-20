@@ -1,127 +1,113 @@
     <?php
-    class Todo
+    class Controller
     {
-        private $myFile =[];
+        private $toDoFileArray =[];
         public $id;
         public $name;
-        public $list;
+        public $list=[];
 
-        public function __construct($id,$name,$list)
+        public function __construct($id,$name, $list=[])
         {
            $this->id =$id;
            $this->name =$name;
            $this->list= $list;
 
+
         }
 
-        // Add a new List within a Todo List
-        public function createTodo($name, $list = [])
-        {
-            // generate id
-            $this->id = generateRandomString(10);
 
+        //Store all array
+        public function storeToDo(){
+
+        }
+
+
+        // Add a new List within a Todo List
+        public function createTodo($id,$name, $list = [])
+        {
+
+            $this->id = $id;
             $this->name = $name;
             $this->list = $list;
 
-            // changing obj to json format
-            $json_str = json_encode($this);
+            // changing obj to array format
+            return $this->toDoFileArray= (array)$this;
 
-            // write to file
-            return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
+
         }
 
-        public function getATodo($id)
-        {
-            // loop through all file rows, convert back to object, check if u have what u are looking for
-            while ($data = fgets($this->myFile)) {
-                $data_obj = json_decode($data);
-                if ($data_obj->id === $id) {
-                    return $data_obj;
-                }
-            }
-        }
-
+        //Show all ToDo List
         public function getAllTodo()
         {
-            $all_todo = [];
-            while ($data = fgets($this->myFile)) {
-                $data_obj = json_decode($data);
-                $all_todo[] = var_dump($data_obj);
-            }
 
-            return $all_todo;
+            $toDoFileArray = [];
+            // Printing all the keys and values one by one
+            $name = array_keys($toDoFileArray);
+            for($i = 0; $i < count($toDoFileArray); $i++) {
+                echo $name[$i] . "{<br>";
+                foreach($toDoFileArray[$name[$i]] as $key => $list) {
+                    echo $key . " : " . $list . "<br>";
+                }
+                echo "}<br>";
+            }
         }
+        //Show a specific list
+        public function getATodo($id)
+        {
+            $toDoFileArray = [];
+            foreach($toDoFileArray as $name => $value){
+                if($name==$id) return $value;
+                if(is_array($value)){
+                    $find = getData($value, $id);
+                    if($find){
+                        return $find;
+                    }
+                }
+            }
+            return $toDoFileArray;
+        }
+
 
         public function updateTodoName($id, $name)
         {
-            $todo = $this->getATodo($id);
-            $todo->name = $name;
-
-            $this->deleteTodo($id);
-
-            $json_str = json_encode($todo);
-            return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
-
 
         }
 
         public function updateTodoList($id, $list)
         {
-            $todo = $this->getATodo($id);
-            $todo->list = $list;
-
-            $this->deleteTodo($id);
-
-            $json_str = json_encode($todo);
-            return file_put_contents("db.json", $json_str . "\n", FILE_APPEND | LOCK_EX);
         }
 
-
-        public function deleteTodoListItem($todoId, $index)
+        public function deleteTodoListItem( $key, $value)
         {
-            $todo = $this->getATodo($todoId);
-
-            $list = $todo->list;
-            unset($list[$index]);
-            $this->updateTodoList($todoId, $list);
-
 
         }
+
+
 
 
         public function deleteTodo($id)
         {
-
-            $todos = [];
-            while ($json_str = fgets($this->myFile)) {
-                $data_obj = json_decode($json_str);
-                if ($data_obj->id !== $id) {
-                    $todos[] = $data_obj;
-                }
-            }
-            $this->deleteAllTodo();
-
-            foreach ($todos as $todo) {
-                $json_str = json_encode($todo);
-                file_put_contents("db.json", $json_str, FILE_APPEND | LOCK_EX);
-            }
-
-        }
-
-        public function deleteAllTodo()
-        {
-            file_put_contents("db.json", "");
-        }
-        public function pinList($id)
-        {
-
+            //Declare the array todo list
+            $toDoFileArray = [];
+            // unset / delete the specific index
+            unset($toDoFileArray [$id]);
+            //return the array
+            return $toDoFileArray;
         }
 
 
+        //Stop the operation
         public function quit(){
             exit('Todo List closed');
-            fclose	($this->myFile);
         }
 
 
     }
+
+
+   // Create object for class(hotel)
+$todo = new Controller;
+
+
+var_dump($todo->getATodo(  "spider-man"));
+

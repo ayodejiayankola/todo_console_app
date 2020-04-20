@@ -1,4 +1,6 @@
 <?php
+
+
 while (true){
     //print the menu on console
     printMenu();
